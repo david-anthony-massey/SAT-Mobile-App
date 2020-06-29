@@ -18,7 +18,7 @@ export default class RegisterForm extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    paddint: 20
+    padding: 20
   },
   input: {
     height: 40,

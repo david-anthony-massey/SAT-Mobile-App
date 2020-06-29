@@ -6,9 +6,9 @@ export default function LoginForm() {
   const [currentTime, setCurrentTime] = useState(0);
 
   useEffect(() => {
-    fetch("http://localhost:5000/time")
-      .then(res => res.text()) // convert to plain text
-      .then(text => console.log(text));
+    fetch("http://223d255349ca.ngrok.io/grade-test");
+    // .then(res => res.text()) // convert to plain text
+    // .then(text => console.log(text));
     // .then(res => res.json())
     // .then(data => {
     //   console.log(data.time);
@@ -34,7 +34,7 @@ export default function LoginForm() {
 
 const styles = StyleSheet.create({
   container: {
-    paddint: 20
+    padding: 20
   },
   input: {
     height: 40,

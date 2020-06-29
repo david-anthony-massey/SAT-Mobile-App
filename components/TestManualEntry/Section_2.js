@@ -1,112 +1,149 @@
-import React, { Component } from "react";
-import Checkbox from "../CustomUI/CheckBox";
+import React, { useEffect, useState, memo } from "react";
+import S2QuestionRow from "../CustomUI/S2QuestionRow";
 import {
   AppRegistry,
   StyleSheet,
   Text,
   Button,
   View,
+  FlatList,
   ScrollView,
   Dimensions
 } from "react-native";
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-  RadioButtonLabel
-} from "react-native-simple-radio-button";
+import { AsyncStorage } from "react-native";
 
-export default class TestFormS2 extends Component {
-  constructor(props) {
-    super(props);
-    console.log(this.props);
+function useA() {
+  const [valueA, setValueA] = useState(null);
+  const [errorA, setErrorA] = useState(null);
+  const [loadingA, setLoadingA] = useState(true);
 
-    this.state = {
-      checkBoxes: [],
-      radioArr: [],
-      studentAnswers: this.props.studentAnswers
-    };
-  }
-
-  render() {
-    if (this.state.checkBoxes[0] === undefined) {
-      let checkBoxes = [];
-      for (let i = 0; i < 44; i++) {
-        checkBoxes.push([
-          <Checkbox checked={false} size={30} question={i} />,
-          <Checkbox checked={false} size={30} question={i} />
-        ]);
-      }
-      this.setState({ checkBoxes: checkBoxes });
+  async function getA() {
+    try {
+      setLoadingA(true);
+      //const value = await AsyncStorage.getAllKeys();
+      const value = await AsyncStorage.multiGet([
+        "S20",
+        "S21",
+        "S22",
+        "S23",
+        "S24",
+        "S25",
+        "S26",
+        "S27",
+        "S28",
+        "S29",
+        "S210",
+        "S211",
+        "S212",
+        "S213",
+        "S214",
+        "S215",
+        "S216",
+        "S217",
+        "S218",
+        "S219",
+        "S220",
+        "S221",
+        "S222",
+        "S223",
+        "S224",
+        "S225",
+        "S226",
+        "S227",
+        "S228",
+        "S229",
+        "S230",
+        "S231",
+        "S232",
+        "S233",
+        "S234",
+        "S235",
+        "S236",
+        "S237",
+        "S238",
+        "S239",
+        "S240",
+        "S241",
+        "S242",
+        "S243"
+      ]);
+      setValueA(value);
+    } catch (e) {
+      setErrorA(e);
+    } finally {
+      setLoadingA(false);
     }
-
-    if (this.state.radioArr[0] === undefined) {
-      var radioArr = [];
-      for (let i = 0; i < 44; i++) {
-        radioArr.push([
-          <Text>{`#${i + 1}`}</Text>,
-          <RadioButtonProject
-            question={i}
-            studentAnswers={this.props.studentAnswers}
-            onUpdate={this.props.onUpdate}
-          />
-        ]);
-      }
-      console.log(radioArr);
-      this.setState({ radioArr: radioArr });
-      console.log(this.state);
-    }
-    let checkBoxes = this.state.checkBoxes;
-    console.log(this.state);
-    return (
-      <>
-        <ScrollView style={styles.scrollContainer}>
-          <View style={styles.container}>
-            {this.state.radioArr.map(function(radioButton, i) {
-              return (
-                <View style={styles.box}>
-                  {radioButton[0]}
-                  {radioButton[1]}
-                  <View style={{ marginLeft: 20 }}>
-                    {checkBoxes[i][0]}
-                    <Text>Blank</Text>
-                  </View>
-                  <View>
-                    {checkBoxes[i][1]}
-                    <Text>Guess</Text>
-                  </View>
-                </View>
-              );
-            })}
-          </View>
-        </ScrollView>
-      </>
-    );
   }
+  useEffect(() => {
+    getA();
+  }, []);
+
+  return [valueA, errorA, loadingA];
 }
 
-var radio_props = [
-  { label: "A", value: 1 },
-  { label: "B", value: 2 },
-  { label: "C", value: 3 },
-  { label: "D", value: 4 }
-];
+function FetchOneResource() {
+  const [valueA, errorA, loadingA] = useA();
+  if (errorA) return "Failed to load resource A";
+  return loadingA ? "Loading..." : valueA;
+}
 
-class RadioButtonProject extends React.Component {
-  render() {
+function TestFormS2(props) {
+  const [submit, setSubmit] = useState(false);
+
+  var questionRows = [];
+  //setStudentAnswers(result);
+  var answerArr = FetchOneResource();
+  //console.log(answerArr);
+
+  if (answerArr !== "Loading...") {
+    var answerObj = {};
+    for (let i = 0; i < answerArr.length; i++) {
+      answerObj[answerArr[i][0]] = answerArr[i][1];
+    }
+    // console.log(studentAnswers);
+
+    for (let i = 0; i < 44; i++) {
+      let val = answerObj[`S2${i}`];
+      //console.log(val);
+      if (val !== null) {
+        val = Number(val);
+        if (val === -10) {
+          questionRows.push([
+            <S2QuestionRow qNumber={i} submit={submit} initial={-11} />
+          ]);
+        } else {
+          questionRows.push([
+            <S2QuestionRow qNumber={i} submit={submit} initial={val} />
+          ]);
+        }
+      } else {
+        questionRows.push([
+          <S2QuestionRow qNumber={i} submit={submit} initial={-12} />
+        ]);
+      }
+    }
+
+    //console.log(state);
+
+    // return (
+    //   <ScrollView style={styles.scrollContainer}>
+    //     <View style={styles.container}>
+    //       {questionRows.map(function(QuestionRow, i) {
+    //         return QuestionRow;
+    //       })}
+    //     </View>
+    //     <Button title="Submit Answers" onPress={() => setSubmit(true)}></Button>
+    //   </ScrollView>
+    // );
+
     return (
-      <RadioForm
-        radio_props={radio_props}
-        formHorizontal={true}
-        labelHorizontal={false}
-        initial={-1}
-        onPress={value => {
-          console.log(this.props.studentAnswers);
-          this.props.studentAnswers[this.props.question] = value;
-          this.props.onUpdate(this.props.studentAnswers);
-          this.setState({ value: value });
-        }}
+      <FlatList
+        data={questionRows}
+        renderItem={({ item }) => <View style={styles.container}>{item}</View>}
       />
     );
+  } else {
+    return <Text>Loading</Text>;
   }
 }
 
@@ -129,3 +166,5 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   }
 });
+
+export default memo(TestFormS2);

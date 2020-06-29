@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+import GlobalState from "./GlobalState";
 import Login from "./components/Login/Login";
 import TestFormS1 from "./components/TestManualEntry/Section_1";
 import TestFormS2 from "./components/TestManualEntry/Section_2";
@@ -12,8 +13,105 @@ import TestFormS4 from "./components/TestManualEntry/Section_4";
 
 const correctAnswers = [];
 
+function ManualSelectScreen({ navigation }) {
+  // const { currentState } = route.params;
+  // const { setCurrentState } = route.params;
+  const [state, setState] = React.useContext(GlobalState);
+  const [buttonPressed, setButtonPressed] = React.useState("Section 1");
+
+  let section;
+  function createButtons(buttonPressed) {
+    if (buttonPressed === "Section 1") {
+      section = <TestFormS1 started={state.S1} />;
+      return (
+        <View>
+          <Button
+            title="Section 2"
+            onPress={() => setButtonPressed("Section 2")}
+          ></Button>
+          <Button
+            title="Section 3"
+            onPress={() => setButtonPressed("Section 3")}
+          ></Button>
+          <Button
+            title="Section 4"
+            onPress={() => setButtonPressed("Section 4")}
+          ></Button>
+        </View>
+      );
+    } else if (buttonPressed === "Section 2") {
+      section = <TestFormS2 />;
+      return (
+        <View>
+          <Button
+            title="Section 1"
+            onPress={() => setButtonPressed("Section 1")}
+          ></Button>
+          <Button
+            title="Section 3"
+            onPress={() => setButtonPressed("Section 3")}
+          ></Button>
+          <Button
+            title="Section 4"
+            onPress={() => setButtonPressed("Section 4")}
+          ></Button>
+        </View>
+      );
+    } else if (buttonPressed === "Section 3") {
+      section = <TestFormS3 />;
+      return (
+        <View>
+          <Button
+            title="Section 1"
+            onPress={() => setButtonPressed("Section 1")}
+          ></Button>
+          <Button
+            title="Section 2"
+            onPress={() => setButtonPressed("Section 2")}
+          ></Button>
+          <Button
+            title="Section 4"
+            onPress={() => setButtonPressed("Section 4")}
+          ></Button>
+        </View>
+      );
+    } else if (buttonPressed === "Section 4") {
+      section = <TestFormS4 />;
+      return (
+        <View>
+          <Button
+            title="Section 1"
+            onPress={() => setButtonPressed("Section 1")}
+          ></Button>
+          <Button
+            title="Section 2"
+            onPress={() => setButtonPressed("Section 2")}
+          ></Button>
+          <Button
+            title="Section 3"
+            onPress={() => setButtonPressed("Section 3")}
+          ></Button>
+        </View>
+      );
+    }
+  }
+
+  let buttons = createButtons(buttonPressed);
+
+  return (
+    <>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        {section}
+      </View>
+      {buttons}
+    </>
+  );
+}
+
 const TestSectionStack = createStackNavigator();
-function SectionSelectScreen({ navigation }) {
+function SectionSelectScreen({ route, navigation }) {
+  // const { currentState } = route.params;
+  // const { setCurrentState } = route.params;
   const [studentS2Answers, setStudentS2Answers] = React.useState([]);
 
   function handleS2Update(studentS2Answers) {
@@ -25,33 +123,54 @@ function SectionSelectScreen({ navigation }) {
       <TestSectionStack.Screen
         name="Section1Screen"
         component={Section1Screen}
+        // initialParams={{
+        //   currentState: currentState,
+        //   setCurrentState: setCurrentState
+        // }}
       />
       <TestSectionStack.Screen
         name="Section2Screen"
         component={Section2Screen}
+        // initialParams={{
+        //   currentState: currentState,
+        //   setCurrentState: setCurrentState
+        // }}
       />
       <TestSectionStack.Screen
         name="Section3Screen"
         component={Section3Screen}
+        // initialParams={{
+        //   currentState: currentState,
+        //   setCurrentState: setCurrentState
+        // }}
       />
       <TestSectionStack.Screen
         name="Section4Screen"
         component={Section4Screen}
+        // initialParams={{
+        //   currentState: currentState,
+        //   setCurrentState: setCurrentState
+        // }}
       />
     </TestSectionStack.Navigator>
   );
 }
 
 function Section1Screen({ navigation }) {
+  const [state, setState] = React.useContext(GlobalState);
   const [studentS1Answers, setStudentS1Answers] = React.useState([]);
 
-  function handleS1Update(studentS1Answers) {
-    setStudentS1Answers(studentS1Answers);
+  function handleS1Update(studentAnswers) {
+    setStudentS1Answers(studentAnswers);
   }
-
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <TestFormS1 studentAnswers={studentS1Answers} onUpdate={handleS1Update} />
+      <TestFormS1
+        studentAnswers={studentS1Answers}
+        onUpdate={handleS1Update}
+        // currentState={currentState}
+        // setCurrentState={setCurrentState}
+      />
       <Text>Select different section</Text>
       <View style={{ flexDirection: "row" }}>
         <Button
@@ -174,13 +293,22 @@ function Section4Screen({ navigation }) {
   );
 }
 
-function HomeScreen({ navigation }) {
+function HomeScreen({ route, navigation }) {
+  // const { currentState } = route.params;
+  // const { setCurrentState } = route.params;
+
   return (
     <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
       <Text>Home screen</Text>
       <Button
         title="Go to Details"
-        onPress={() => navigation.navigate("SectionSelectScreen")}
+        onPress={() =>
+          // navigation.navigate("SectionSelectScreen", {
+          //   currentState: currentState,
+          //   setCurrentState: setCurrentState
+          // })
+          navigation.navigate("ManualSelectScreen")
+        }
       />
     </View>
   );
@@ -200,13 +328,27 @@ function SettingsScreen({ navigation }) {
 
 const ProfileStack = createStackNavigator();
 
-function ProfileScreen() {
+function ProfileScreen({ route, navigation }) {
+  // const { currentState } = route.params;
+  // const { setCurrentState } = route.params;
+
   return (
     <ProfileStack.Navigator>
-      <ProfileStack.Screen name={"HomeScreen"} component={HomeScreen} />
       <ProfileStack.Screen
-        name="SectionSelectScreen"
-        component={SectionSelectScreen}
+        name={"HomeScreen"}
+        component={HomeScreen}
+        // initialParams={{
+        //   currentState: currentState,
+        //   setCurrentState: setCurrentState
+        // }}
+      />
+      <ProfileStack.Screen
+        name="ManualSelectScreen"
+        component={ManualSelectScreen}
+        // initialParams={{
+        //   currentState: currentState,
+        //   setCurrentState: setCurrentState
+        // }}
       />
     </ProfileStack.Navigator>
   );
@@ -242,36 +384,26 @@ function ConceptsScreen() {
 
 const Tab = createBottomTabNavigator();
 
+function App1() {
+  return (
+    <NavigationContainer>
+      <Tab.Navigator>
+        <Tab.Screen name="Profile" component={ProfileScreen} />
+        <Tab.Screen name="Tests" component={TestsScreen} />
+        <Tab.Screen name="Concepts" component={ConceptsScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
+  );
+}
+
 // export default function App() {
-//   const [currentState, setCurrentState] = React.useState(IMPORT_FROM_DATABASE);
-
-//   function handleCurrentStateUpdate(currentState) {
-//     setCurrentState(currentState);
-//   }
-
-//   return (
-//     <NavigationContainer>
-//       <Tab.Navigator>
-//         <Tab.Screen
-//           name="Profile"
-//           component={ProfileScreen}
-//           initialParams={{ itemId: 42 }}
-//         />
-//         <Tab.Screen
-//           name="Tests"
-//           component={TestsScreen}
-//           initialParams={{ itemId: 42 }}
-//         />
-//         <Tab.Screen
-//           name="Concepts"
-//           component={ConceptsScreen}
-//           initialParams={{ itemId: 42 }}
-//         />
-//       </Tab.Navigator>
-//     </NavigationContainer>
-//   );
+//   return <Login />;
 // }
-
 export default function App() {
-  return <Login />;
+  const [state, setState] = React.useState({});
+  return (
+    <GlobalState.Provider value={[state, setState]}>
+      <App1 />
+    </GlobalState.Provider>
+  );
 }

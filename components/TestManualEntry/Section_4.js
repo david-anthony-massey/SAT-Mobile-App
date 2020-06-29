@@ -1,112 +1,134 @@
-import React, { Component } from "react";
-import Checkbox from "../CustomUI/CheckBox";
+import React, { useEffect, useState, memo } from "react";
+import S4QuestionRow from "../CustomUI/S4QuestionRow";
 import {
   AppRegistry,
   StyleSheet,
   Text,
   Button,
   View,
+  FlatList,
   ScrollView,
   Dimensions
 } from "react-native";
-import RadioForm, {
-  RadioButton,
-  RadioButtonInput,
-  RadioButtonLabel
-} from "react-native-simple-radio-button";
+import { AsyncStorage } from "react-native";
 
-export default class TestFormS4 extends Component {
-  constructor(props) {
-    super(props);
-    console.log(this.props);
+function useA() {
+  const [valueA, setValueA] = useState(null);
+  const [errorA, setErrorA] = useState(null);
+  const [loadingA, setLoadingA] = useState(true);
 
-    this.state = {
-      checkBoxes: [],
-      radioArr: [],
-      studentAnswers: this.props.studentAnswers
-    };
-  }
-
-  render() {
-    if (this.state.checkBoxes[0] === undefined) {
-      let checkBoxes = [];
-      for (let i = 0; i < 30; i++) {
-        checkBoxes.push([
-          <Checkbox checked={false} size={30} question={i} />,
-          <Checkbox checked={false} size={30} question={i} />
-        ]);
-      }
-      this.setState({ checkBoxes: checkBoxes });
+  async function getA() {
+    try {
+      setLoadingA(true);
+      //const value = await AsyncStorage.getAllKeys();
+      const value = await AsyncStorage.multiGet([
+        "S40",
+        "S41",
+        "S42",
+        "S43",
+        "S44",
+        "S45",
+        "S46",
+        "S47",
+        "S48",
+        "S49",
+        "S410",
+        "S411",
+        "S412",
+        "S413",
+        "S414",
+        "S415",
+        "S416",
+        "S417",
+        "S418",
+        "S419",
+        "S420",
+        "S421",
+        "S422",
+        "S423",
+        "S424",
+        "S425",
+        "S426",
+        "S427",
+        "S428",
+        "S429"
+      ]);
+      setValueA(value);
+    } catch (e) {
+      setErrorA(e);
+    } finally {
+      setLoadingA(false);
     }
-
-    if (this.state.radioArr[0] === undefined) {
-      var radioArr = [];
-      for (let i = 0; i < 30; i++) {
-        radioArr.push([
-          <Text>{`#${i + 1}`}</Text>,
-          <RadioButtonProject
-            question={i}
-            studentAnswers={this.props.studentAnswers}
-            onUpdate={this.props.onUpdate}
-          />
-        ]);
-      }
-      console.log(radioArr);
-      this.setState({ radioArr: radioArr });
-      console.log(this.state);
-    }
-    let checkBoxes = this.state.checkBoxes;
-    console.log(this.state);
-    return (
-      <>
-        <ScrollView style={styles.scrollContainer}>
-          <View style={styles.container}>
-            {this.state.radioArr.map(function(radioButton, i) {
-              return (
-                <View style={styles.box}>
-                  {radioButton[0]}
-                  {radioButton[1]}
-                  <View style={{ marginLeft: 20 }}>
-                    {checkBoxes[i][0]}
-                    <Text>Blank</Text>
-                  </View>
-                  <View>
-                    {checkBoxes[i][1]}
-                    <Text>Guess</Text>
-                  </View>
-                </View>
-              );
-            })}
-          </View>
-        </ScrollView>
-      </>
-    );
   }
+  useEffect(() => {
+    getA();
+  }, []);
+
+  return [valueA, errorA, loadingA];
 }
 
-var radio_props = [
-  { label: "A", value: 1 },
-  { label: "B", value: 2 },
-  { label: "C", value: 3 },
-  { label: "D", value: 4 }
-];
+function FetchOneResource() {
+  const [valueA, errorA, loadingA] = useA();
+  if (errorA) return "Failed to load resource A";
+  return loadingA ? "Loading..." : valueA;
+}
+function TestFormS4(props) {
+  const [submit, setSubmit] = useState(false);
 
-class RadioButtonProject extends React.Component {
-  render() {
+  var questionRows = [];
+  //setStudentAnswers(result);
+  var answerArr = FetchOneResource();
+  // console.log(answerArr);
+
+  if (answerArr !== "Loading...") {
+    var answerObj = {};
+    for (let i = 0; i < answerArr.length; i++) {
+      answerObj[answerArr[i][0]] = answerArr[i][1];
+    }
+    // console.log(studentAnswers);
+
+    for (let i = 0; i < 30; i++) {
+      let val = answerObj[`S4${i}`];
+      // console.log(val);
+      if (val !== null) {
+        val = Number(val);
+        if (val === -10) {
+          questionRows.push([
+            <S4QuestionRow qNumber={i} submit={submit} initial={-11} />
+          ]);
+        } else {
+          questionRows.push([
+            <S4QuestionRow qNumber={i} submit={submit} initial={val} />
+          ]);
+        }
+      } else {
+        questionRows.push([
+          <S4QuestionRow qNumber={i} submit={submit} initial={-12} />
+        ]);
+      }
+    }
+
+    // console.log(state);
+
+    // return (
+    //   <ScrollView style={styles.scrollContainer}>
+    //     <View style={styles.container}>
+    //       {questionRows.map(function(QuestionRow, i) {
+    //         return QuestionRow;
+    //       })}
+    //     </View>
+    //     <Button title="Submit Answers" onPress={() => setSubmit(true)}></Button>
+    //   </ScrollView>
+    // );
+
     return (
-      <RadioForm
-        radio_props={radio_props}
-        formHorizontal={true}
-        labelHorizontal={false}
-        initial={-1}
-        onPress={value => {
-          console.log(this.props.studentAnswers);
-          this.props.studentAnswers[this.props.question] = value;
-          this.props.onUpdate(this.props.studentAnswers);
-          this.setState({ value: value });
-        }}
+      <FlatList
+        data={questionRows}
+        renderItem={({ item }) => <View style={styles.container}>{item}</View>}
       />
     );
+  } else {
+    return <Text>Loading</Text>;
   }
 }
 
@@ -129,3 +151,5 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   }
 });
+
+export default memo(TestFormS4);

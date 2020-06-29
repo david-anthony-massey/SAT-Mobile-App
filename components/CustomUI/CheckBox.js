@@ -10,7 +10,12 @@ export default class Checkbox extends Component {
     };
   }
 
-  handleOnPress = () => this.setState({ checked: !this.state.checked });
+  handleOnPress = () => {
+    this.setState(
+      { checked: !this.state.checked },
+      this.props.onCheck(this.state.checked)
+    );
+  };
 
   // Returns an enabled or disabled Checkbox depending on the value of this.props.disabled
   isDisabled = () => {
