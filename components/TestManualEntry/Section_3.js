@@ -1,5 +1,6 @@
 import React, { useEffect, useState, memo } from "react";
 import S3QuestionRow from "../CustomUI/S3QuestionRow";
+import S3ManualQuestionRow from "../CustomUI/S3ManualQuestionRow";
 import {
   AppRegistry,
   StyleSheet,
@@ -36,7 +37,12 @@ function useA() {
         "S311",
         "S312",
         "S313",
-        "S314"
+        "S314",
+        "S315",
+        "S316",
+        "S317",
+        "S318",
+        "S319"
       ]);
       setValueA(value);
     } catch (e) {
@@ -63,7 +69,7 @@ function TestFormS3(props) {
   var questionRows = [];
   //setStudentAnswers(result);
   var answerArr = FetchOneResource();
-  // console.log(answerArr);
+  console.log(answerArr);
 
   if (answerArr !== "Loading...") {
     var answerObj = {};
@@ -89,6 +95,20 @@ function TestFormS3(props) {
       } else {
         questionRows.push([
           <S3QuestionRow qNumber={i} submit={submit} initial={-12} />
+        ]);
+      }
+    }
+
+    for (let i = 15; i < 20; i++) {
+      let val = answerObj[`S3${i}`];
+      // console.log(val);
+      if (val !== null) {
+        questionRows.push([
+          <S3ManualQuestionRow qNumber={i} submit={submit} initial={val} />
+        ]);
+      } else {
+        questionRows.push([
+          <S3ManualQuestionRow qNumber={i} submit={submit} initial={"-"} />
         ]);
       }
     }
