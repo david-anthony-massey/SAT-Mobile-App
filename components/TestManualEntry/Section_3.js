@@ -130,6 +130,8 @@ function TestFormS3(props) {
       <FlatList
         data={questionRows}
         renderItem={({ item }) => <View style={styles.container}>{item}</View>}
+        removeClippedSubviews={false}
+        windowSize={10}
       />
     );
   } else {

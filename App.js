@@ -10,6 +10,8 @@ import TestFormS1 from "./components/TestManualEntry/Section_1";
 import TestFormS2 from "./components/TestManualEntry/Section_2";
 import TestFormS3 from "./components/TestManualEntry/Section_3";
 import TestFormS4 from "./components/TestManualEntry/Section_4";
+import TestSelectionScreen from "./components/Screens/TestSelectionScreen";
+import TestAnswerEntryScreen from "./components/Screens/TestAnswerEntryScreen";
 
 const correctAnswers = [];
 
@@ -24,10 +26,11 @@ function ManualSelectScreen({ navigation }) {
     if (buttonPressed === "Section 1") {
       section = <TestFormS1 started={state.S1} />;
       return (
-        <View>
+        <View style={{ flexDirection: "row" }}>
           <Button
             title="Section 2"
             onPress={() => setButtonPressed("Section 2")}
+            style={{ marginRight: "20" }}
           ></Button>
           <Button
             title="Section 3"
@@ -359,10 +362,13 @@ const TestsStack = createStackNavigator();
 function TestsScreen() {
   return (
     <TestsStack.Navigator>
-      <TestsStack.Screen name="SettingsScreen" component={SettingsScreen} />
       <TestsStack.Screen
-        name="SectionSelectScreen"
-        component={SectionSelectScreen}
+        name="Test Selection Screen"
+        component={TestSelectionScreen}
+      />
+      <TestsStack.Screen
+        name="Test Answer Entry Screen"
+        component={TestAnswerEntryScreen}
       />
     </TestsStack.Navigator>
   );

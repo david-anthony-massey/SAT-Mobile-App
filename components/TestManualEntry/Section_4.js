@@ -1,13 +1,14 @@
 import React, { useEffect, useState, memo } from "react";
 import S4QuestionRow from "../CustomUI/S4QuestionRow";
+import S4ManualQuestionRow from "../CustomUI/S4ManualQuestionRow";
 import {
   AppRegistry,
   StyleSheet,
   Text,
   Button,
   View,
-  FlatList,
   ScrollView,
+  FlatList,
   Dimensions
 } from "react-native";
 import { AsyncStorage } from "react-native";
@@ -51,7 +52,15 @@ function useA() {
         "S426",
         "S427",
         "S428",
-        "S429"
+        "S429",
+        "S430",
+        "S431",
+        "S432",
+        "S433",
+        "S434",
+        "S435",
+        "S436",
+        "S437"
       ]);
       setValueA(value);
     } catch (e) {
@@ -78,7 +87,7 @@ function TestFormS4(props) {
   var questionRows = [];
   //setStudentAnswers(result);
   var answerArr = FetchOneResource();
-  // console.log(answerArr);
+  console.log(answerArr);
 
   if (answerArr !== "Loading...") {
     var answerObj = {};
@@ -108,6 +117,20 @@ function TestFormS4(props) {
       }
     }
 
+    for (let i = 30; i < 38; i++) {
+      let val = answerObj[`S4${i}`];
+      // console.log(val);
+      if (val !== null) {
+        questionRows.push([
+          <S4ManualQuestionRow qNumber={i} submit={submit} initial={val} />
+        ]);
+      } else {
+        questionRows.push([
+          <S4ManualQuestionRow qNumber={i} submit={submit} initial={"null"} />
+        ]);
+      }
+    }
+
     // console.log(state);
 
     // return (
@@ -125,6 +148,8 @@ function TestFormS4(props) {
       <FlatList
         data={questionRows}
         renderItem={({ item }) => <View style={styles.container}>{item}</View>}
+        removeClippedSubviews={false}
+        windowSize={10}
       />
     );
   } else {

@@ -51,6 +51,16 @@ function S4QuestionRow(props) {
       setPickedAnswer(Math.abs(props.initial) - 1);
     }
 
+    // AsyncStorage.getItem(`S1${props.qNumber}`).then(value => {
+    //   if (value === null) {
+    //     console.log("nope");
+    //     setStudentAnswer(-1);
+    //   } else {
+    //     console.log("yep");
+    //     setStudentAnswer(Number(value));
+    //   }
+    // });
+
     var guessCheckBox = (
       <View>
         <Checkbox

@@ -12,7 +12,7 @@ import {
   Dimensions
 } from "react-native";
 
-function S3ManualQuestionRow(props) {
+function S4ManualQuestionRow(props) {
   const [blankCheck, setBlankCheck] = useState(false);
   const [guessCheck, setGuessCheck] = useState(false);
   const [alreadyBlank, setAlreadyBlank] = useState(true);
@@ -28,7 +28,7 @@ function S3ManualQuestionRow(props) {
     var guessCheckBox;
     var manualAnswerForm = <></>;
 
-    AsyncStorage.setItem(`S3${props.qNumber}`, "blank");
+    AsyncStorage.setItem(`S4${props.qNumber}`, "blank");
   } else {
     //console.log(props.initial, "initial");
     if (props.initial === "blank" && alreadyBlank) {
@@ -52,7 +52,7 @@ function S3ManualQuestionRow(props) {
     //     setStudentAnswer(Number(value));
     //   }
     // });
-    if (props.initial === "blank") {
+    if (props.initial === "blank" || props.initial === "null") {
       var ans = "";
     } else if (guessCheck && pickedAnswer[0] === "-") {
       setPickedAnswer(pickedAnswer.slice(1));
@@ -61,7 +61,6 @@ function S3ManualQuestionRow(props) {
     }
 
     console.log(ans);
-
     var guessCheckBox = (
       <View>
         <Checkbox
@@ -72,14 +71,14 @@ function S3ManualQuestionRow(props) {
             //console.log("1st picked ans", pickedAnswer);
             if (guessCheck) {
               AsyncStorage.setItem(
-                `S3${props.qNumber}`,
+                `S4${props.qNumber}`,
                 `${pickedAnswer}`
               ).then(() => {
                 setGuessCheck(!guessCheck);
               });
             } else {
               AsyncStorage.setItem(
-                `S3${props.qNumber}`,
+                `S4${props.qNumber}`,
                 `-${pickedAnswer}`
               ).then(() => {
                 setGuessCheck(!guessCheck);
@@ -104,11 +103,11 @@ function S3ManualQuestionRow(props) {
         onChangeText={text => {
           console.log(`a${ans}a _ t${text}t`);
           if (guessCheck) {
-            AsyncStorage.setItem(`S3${props.qNumber}`, `-${text}`).then(() => {
+            AsyncStorage.setItem(`S4${props.qNumber}`, `-${text}`).then(() => {
               setPickedAnswer(text);
             });
           } else {
-            AsyncStorage.setItem(`S3${props.qNumber}`, `${text}`).then(() => {
+            AsyncStorage.setItem(`S4${props.qNumber}`, `${text}`).then(() => {
               setPickedAnswer(text);
             });
           }
@@ -125,7 +124,7 @@ function S3ManualQuestionRow(props) {
       question={props.qNumber}
       onCheck={() => {
         if (blankCheck) {
-          AsyncStorage.setItem(`S3${props.qNumber}`, "").then(() => {
+          AsyncStorage.setItem(`S4${props.qNumber}`, "").then(() => {
             setBlankCheck(!blankCheck);
           });
         } else {
@@ -168,4 +167,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default memo(S3ManualQuestionRow);
+export default memo(S4ManualQuestionRow);

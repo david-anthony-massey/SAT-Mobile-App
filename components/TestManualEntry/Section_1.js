@@ -150,8 +150,9 @@ function TestFormS1(props) {
 
     return (
       <FlatList
-        removeClippedSubviews={true}
-        initialNumToRender={1}
+        removeClippedSubviews={false}
+        windowSize={7}
+        initialNumToRender={10}
         data={questionRows}
         renderItem={({ item }) => <View style={styles.container}>{item}</View>}
       />
