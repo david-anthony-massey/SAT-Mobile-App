@@ -6,7 +6,6 @@ import {
   StyleSheet,
   Text,
   TextInput,
-  Button,
   View,
   ScrollView,
   Dimensions

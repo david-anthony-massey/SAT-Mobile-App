@@ -4,7 +4,6 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  Button,
   View,
   FlatList,
   ScrollView,

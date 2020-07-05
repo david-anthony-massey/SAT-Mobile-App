@@ -5,7 +5,6 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  Button,
   View,
   ScrollView,
   FlatList,
@@ -130,19 +129,6 @@ function TestFormS4(props) {
         ]);
       }
     }
-
-    // console.log(state);
-
-    // return (
-    //   <ScrollView style={styles.scrollContainer}>
-    //     <View style={styles.container}>
-    //       {questionRows.map(function(QuestionRow, i) {
-    //         return QuestionRow;
-    //       })}
-    //     </View>
-    //     <Button title="Submit Answers" onPress={() => setSubmit(true)}></Button>
-    //   </ScrollView>
-    // );
 
     return (
       <FlatList

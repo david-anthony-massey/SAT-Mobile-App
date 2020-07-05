@@ -5,7 +5,6 @@ import {
   AppRegistry,
   StyleSheet,
   Text,
-  Button,
   View,
   ScrollView,
   Dimensions
