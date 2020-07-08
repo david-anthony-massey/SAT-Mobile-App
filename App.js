@@ -13,6 +13,7 @@ import TestFormS3 from "./components/TestManualEntry/Section_3";
 import TestFormS4 from "./components/TestManualEntry/Section_4";
 import TestSelectionScreen from "./components/Screens/TestSelectionScreen";
 import TestAnswerEntryScreen from "./components/Screens/TestAnswerEntryScreen";
+import GradeResultsScreen from "./components/Screens/GradeResultsScreen";
 
 const correctAnswers = [];
 
@@ -370,6 +371,10 @@ function TestsScreen() {
       <TestsStack.Screen
         name="TestAnswerEntryScreen"
         component={TestAnswerEntryScreen}
+      />
+      <TestsStack.Screen
+        name="GradeResultsScreen"
+        component={GradeResultsScreen}
       />
     </TestsStack.Navigator>
   );

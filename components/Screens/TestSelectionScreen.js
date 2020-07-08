@@ -33,7 +33,9 @@ function TestSelectionScreen({ navigation }) {
         title={"Grade test Manually"}
         onPress={() => {
           if (selectedTest) {
-            navigation.navigate("TestAnswerEntryScreen");
+            navigation.navigate("TestAnswerEntryScreen", {
+              selectedTest: selectedTest
+            });
           } else {
             alert("you need to select a test first");
           }

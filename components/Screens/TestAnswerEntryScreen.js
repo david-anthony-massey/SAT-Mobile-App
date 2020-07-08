@@ -12,10 +12,9 @@ import TestFormS4 from "../TestManualEntry/Section_4";
 
 const correctAnswers = [];
 
-function TestAnswerEntryScreen({ navigation }) {
-  // const { currentState } = route.params;
-  // const { setCurrentState } = route.params;
+function TestAnswerEntryScreen({ route, navigation }) {
   const [buttonPressed, setButtonPressed] = React.useState("Section 1");
+  const { selectedTest } = route.params;
 
   let section;
   function createButtons(buttonPressed) {
@@ -36,6 +35,14 @@ function TestAnswerEntryScreen({ navigation }) {
             title="Section 4"
             onPress={() => setButtonPressed("Section 4")}
           ></Button>
+          <Button
+            title="Submit For Grading"
+            onPress={() =>
+              navigation.navigate("GradeResultsScreen", {
+                selectedTest: selectedTest
+              })
+            }
+          ></Button>
         </View>
       );
     } else if (buttonPressed === "Section 2") {
@@ -53,6 +60,14 @@ function TestAnswerEntryScreen({ navigation }) {
           <Button
             title="Section 4"
             onPress={() => setButtonPressed("Section 4")}
+          ></Button>
+          <Button
+            title="Submit For Grading"
+            onPress={() =>
+              navigation.navigate("GradeResultsScreen", {
+                selectedTest: selectedTest
+              })
+            }
           ></Button>
         </View>
       );
@@ -72,6 +87,14 @@ function TestAnswerEntryScreen({ navigation }) {
             title="Section 4"
             onPress={() => setButtonPressed("Section 4")}
           ></Button>
+          <Button
+            title="Submit For Grading"
+            onPress={() =>
+              navigation.navigate("GradeResultsScreen", {
+                selectedTest: selectedTest
+              })
+            }
+          ></Button>
         </View>
       );
     } else if (buttonPressed === "Section 4") {
@@ -89,6 +112,14 @@ function TestAnswerEntryScreen({ navigation }) {
           <Button
             title="Section 3"
             onPress={() => setButtonPressed("Section 3")}
+          ></Button>
+          <Button
+            title="Submit For Grading"
+            onPress={() =>
+              navigation.navigate("GradeResultsScreen", {
+                selectedTest: selectedTest
+              })
+            }
           ></Button>
         </View>
       );

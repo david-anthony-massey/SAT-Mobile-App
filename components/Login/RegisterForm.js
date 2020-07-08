@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { StyleSheet, View, Image, Button, Text } from "react-native";
+import { StyleSheet, View, Image, Text } from "react-native";
 import { TextInput } from "react-native-gesture-handler";
 
 export default class RegisterForm extends Component {
