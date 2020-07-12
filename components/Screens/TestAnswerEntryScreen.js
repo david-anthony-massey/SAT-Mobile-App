@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, View } from "react-native";
+import { Text, View, AsyncStorage } from "react-native";
 import { Button, ListItem } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -46,7 +46,6 @@ function TestAnswerEntryScreen({ route, navigation }) {
           <Button
             title="Submit For Grading"
             onPress={() => {
-              AsyncStorage.multiRemove(allQuestions);
               navigation.navigate("GradeResultsScreen", {
                 selectedTest: selectedTest
               });
@@ -82,7 +81,6 @@ function TestAnswerEntryScreen({ route, navigation }) {
           <Button
             title="Submit For Grading"
             onPress={() => {
-              AsyncStorage.multiRemove(allQuestions);
               navigation.navigate("GradeResultsScreen", {
                 selectedTest: selectedTest
               });
@@ -118,7 +116,6 @@ function TestAnswerEntryScreen({ route, navigation }) {
           <Button
             title="Submit For Grading"
             onPress={() => {
-              AsyncStorage.multiRemove(allQuestions);
               navigation.navigate("GradeResultsScreen", {
                 selectedTest: selectedTest
               });
@@ -154,7 +151,6 @@ function TestAnswerEntryScreen({ route, navigation }) {
           <Button
             title="Submit For Grading"
             onPress={() => {
-              AsyncStorage.multiRemove(allQuestions);
               navigation.navigate("GradeResultsScreen", {
                 selectedTest: selectedTest
               });

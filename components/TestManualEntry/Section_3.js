@@ -9,9 +9,9 @@ import {
   View,
   ScrollView,
   FlatList,
-  Dimensions
+  Dimensions,
+  AsyncStorage
 } from "react-native";
-import { AsyncStorage } from "react-native";
 
 function useA() {
   const [valueA, setValueA] = useState(null);
