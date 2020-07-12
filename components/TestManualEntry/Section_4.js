@@ -1,4 +1,5 @@
 import React, { useEffect, useState, memo } from "react";
+import { s4Questions } from "../useful";
 import S4QuestionRow from "../CustomUI/S4QuestionRow";
 import S4ManualQuestionRow from "../CustomUI/S4ManualQuestionRow";
 import {
@@ -21,46 +22,7 @@ function useA() {
     try {
       setLoadingA(true);
       //const value = await AsyncStorage.getAllKeys();
-      const value = await AsyncStorage.multiGet([
-        "S40",
-        "S41",
-        "S42",
-        "S43",
-        "S44",
-        "S45",
-        "S46",
-        "S47",
-        "S48",
-        "S49",
-        "S410",
-        "S411",
-        "S412",
-        "S413",
-        "S414",
-        "S415",
-        "S416",
-        "S417",
-        "S418",
-        "S419",
-        "S420",
-        "S421",
-        "S422",
-        "S423",
-        "S424",
-        "S425",
-        "S426",
-        "S427",
-        "S428",
-        "S429",
-        "S430",
-        "S431",
-        "S432",
-        "S433",
-        "S434",
-        "S435",
-        "S436",
-        "S437"
-      ]);
+      const value = await AsyncStorage.multiGet(s4Questions);
       setValueA(value);
     } catch (e) {
       setErrorA(e);

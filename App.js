@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, View } from "react-native";
+import { Text, View, StyleSheet, ImageBackground } from "react-native";
 import { Button, ListItem } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -32,7 +32,7 @@ function ManualSelectScreen({ navigation }) {
           <Button
             title="Section 2"
             onPress={() => setButtonPressed("Section 2")}
-            style={{ marginRight: "20" }}
+            style={{ marginRight: 20 }}
           ></Button>
           <Button
             title="Section 3"
@@ -303,19 +303,10 @@ function HomeScreen({ route, navigation }) {
   // const { setCurrentState } = route.params;
 
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Home screen</Text>
-      <Button
-        title="Go to Details"
-        onPress={() =>
-          // navigation.navigate("SectionSelectScreen", {
-          //   currentState: currentState,
-          //   setCurrentState: setCurrentState
-          // })
-          navigation.navigate("ManualSelectScreen")
-        }
-      />
-    </View>
+    <ImageBackground
+      source={require("/Users/reku68/Documents/New Github/RRN_Flask_SAT/SAT_Mobile/assets/images/SATFront.png")}
+      style={styles.background}
+    ></ImageBackground>
   );
 }
 
@@ -338,7 +329,11 @@ function ProfileScreen({ route, navigation }) {
   // const { setCurrentState } = route.params;
 
   return (
-    <ProfileStack.Navigator>
+    <ProfileStack.Navigator
+      screenOptions={{
+        headerShown: false
+      }}
+    >
       <ProfileStack.Screen
         name={"HomeScreen"}
         component={HomeScreen}
@@ -385,7 +380,10 @@ const ConceptsStack = createStackNavigator();
 function ConceptsScreen() {
   return (
     <ConceptsStack.Navigator>
-      <ConceptsStack.Screen name="SettingsScreen" component={SettingsScreen} />
+      <ConceptsStack.Screen
+        name="SectionSelectScreen"
+        component={SectionSelectScreen}
+      />
       <ConceptsStack.Screen
         name="SectionSelectScreen"
         component={SectionSelectScreen}
@@ -419,3 +417,24 @@ export default function App() {
     </GlobalState.Provider>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    flexDirection: "column"
+  },
+  image: {
+    flex: 1,
+    resizeMode: "cover",
+    justifyContent: "center"
+  },
+  background: {
+    flex: 1,
+    resizeMode: "cover"
+  },
+  text: {
+    color: "grey",
+    fontSize: 30,
+    fontWeight: "bold"
+  }
+});

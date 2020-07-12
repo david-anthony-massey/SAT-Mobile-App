@@ -4,6 +4,7 @@ import { Button, ListItem } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { allQuestions } from "../useful";
 
 import TestFormS1 from "../TestManualEntry/Section_1";
 import TestFormS2 from "../TestManualEntry/Section_2";
@@ -23,25 +24,34 @@ function TestAnswerEntryScreen({ route, navigation }) {
       return (
         <View style={{ flexDirection: "row" }}>
           <Button
-            title="Section 2"
+            title="S1"
+            disabled={true}
+            buttonStyle={{ marginRight: 10, marginLeft: 10 }}
+          ></Button>
+          <Button
+            title="S2"
             onPress={() => setButtonPressed("Section 2")}
-            style={{ marginRight: "20" }}
+            buttonStyle={{ marginRight: 10 }}
           ></Button>
           <Button
-            title="Section 3"
+            title="S3"
             onPress={() => setButtonPressed("Section 3")}
+            buttonStyle={{ marginRight: 10 }}
           ></Button>
           <Button
-            title="Section 4"
+            title="S4"
             onPress={() => setButtonPressed("Section 4")}
+            buttonStyle={{ marginRight: 10 }}
           ></Button>
           <Button
             title="Submit For Grading"
-            onPress={() =>
+            onPress={() => {
+              AsyncStorage.multiRemove(allQuestions);
               navigation.navigate("GradeResultsScreen", {
                 selectedTest: selectedTest
-              })
-            }
+              });
+            }}
+            buttonStyle={{ marginLeft: 10 }}
           ></Button>
         </View>
       );
@@ -50,24 +60,34 @@ function TestAnswerEntryScreen({ route, navigation }) {
       return (
         <View style={{ flexDirection: "row" }}>
           <Button
-            title="Section 1"
+            title="S1"
             onPress={() => setButtonPressed("Section 1")}
+            buttonStyle={{ marginRight: 10, marginLeft: 10 }}
           ></Button>
           <Button
-            title="Section 3"
+            title="S2"
+            disabled={true}
+            buttonStyle={{ marginRight: 10 }}
+          ></Button>
+          <Button
+            title="S3"
             onPress={() => setButtonPressed("Section 3")}
+            buttonStyle={{ marginRight: 10 }}
           ></Button>
           <Button
-            title="Section 4"
+            title="S4"
             onPress={() => setButtonPressed("Section 4")}
+            buttonStyle={{ marginRight: 10 }}
           ></Button>
           <Button
             title="Submit For Grading"
-            onPress={() =>
+            onPress={() => {
+              AsyncStorage.multiRemove(allQuestions);
               navigation.navigate("GradeResultsScreen", {
                 selectedTest: selectedTest
-              })
-            }
+              });
+            }}
+            buttonStyle={{ marginLeft: 10 }}
           ></Button>
         </View>
       );
@@ -76,24 +96,34 @@ function TestAnswerEntryScreen({ route, navigation }) {
       return (
         <View style={{ flexDirection: "row" }}>
           <Button
-            title="Section 1"
+            title="S1"
             onPress={() => setButtonPressed("Section 1")}
+            buttonStyle={{ marginRight: 10, marginLeft: 10 }}
           ></Button>
           <Button
-            title="Section 2"
+            title="S2"
             onPress={() => setButtonPressed("Section 2")}
+            buttonStyle={{ marginRight: 10 }}
           ></Button>
           <Button
-            title="Section 4"
+            title="S3"
+            disabled={true}
+            buttonStyle={{ marginRight: 10 }}
+          ></Button>
+          <Button
+            title="S4"
             onPress={() => setButtonPressed("Section 4")}
+            buttonStyle={{ marginRight: 10 }}
           ></Button>
           <Button
             title="Submit For Grading"
-            onPress={() =>
+            onPress={() => {
+              AsyncStorage.multiRemove(allQuestions);
               navigation.navigate("GradeResultsScreen", {
                 selectedTest: selectedTest
-              })
-            }
+              });
+            }}
+            buttonStyle={{ marginLeft: 10 }}
           ></Button>
         </View>
       );
@@ -102,24 +132,34 @@ function TestAnswerEntryScreen({ route, navigation }) {
       return (
         <View style={{ flexDirection: "row" }}>
           <Button
-            title="Section 1"
+            title="S1"
             onPress={() => setButtonPressed("Section 1")}
+            buttonStyle={{ marginRight: 10, marginLeft: 10 }}
           ></Button>
           <Button
-            title="Section 2"
+            title="S2"
             onPress={() => setButtonPressed("Section 2")}
+            buttonStyle={{ marginRight: 10 }}
           ></Button>
           <Button
-            title="Section 3"
+            title="S3"
             onPress={() => setButtonPressed("Section 3")}
+            buttonStyle={{ marginRight: 10 }}
+          ></Button>
+          <Button
+            title="S4"
+            disabled={true}
+            buttonStyle={{ marginRight: 10 }}
           ></Button>
           <Button
             title="Submit For Grading"
-            onPress={() =>
+            onPress={() => {
+              AsyncStorage.multiRemove(allQuestions);
               navigation.navigate("GradeResultsScreen", {
                 selectedTest: selectedTest
-              })
-            }
+              });
+            }}
+            buttonStyle={{ marginLeft: 10 }}
           ></Button>
         </View>
       );

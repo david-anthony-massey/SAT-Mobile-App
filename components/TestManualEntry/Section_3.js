@@ -1,4 +1,5 @@
 import React, { useEffect, useState, memo } from "react";
+import { s3Questions } from "../useful";
 import S3QuestionRow from "../CustomUI/S3QuestionRow";
 import S3ManualQuestionRow from "../CustomUI/S3ManualQuestionRow";
 import {
@@ -21,28 +22,7 @@ function useA() {
     try {
       setLoadingA(true);
       //const value = await AsyncStorage.getAllKeys();
-      const value = await AsyncStorage.multiGet([
-        "S30",
-        "S31",
-        "S32",
-        "S33",
-        "S34",
-        "S35",
-        "S36",
-        "S37",
-        "S38",
-        "S39",
-        "S310",
-        "S311",
-        "S312",
-        "S313",
-        "S314",
-        "S315",
-        "S316",
-        "S317",
-        "S318",
-        "S319"
-      ]);
+      const value = await AsyncStorage.multiGet(s3Questions);
       setValueA(value);
     } catch (e) {
       setErrorA(e);

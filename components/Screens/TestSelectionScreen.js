@@ -1,5 +1,13 @@
 import * as React from "react";
-import { Text, View, FlatList, TouchableOpacity } from "react-native";
+import {
+  Pressable,
+  Text,
+  View,
+  FlatList,
+  TouchableOpacity,
+  StyleSheet,
+  SafeAreaView
+} from "react-native";
 import { Button, ListItem } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -17,32 +25,60 @@ function TestSelectionScreen({ navigation }) {
   console.log(testData);
   return (
     <>
-      <FlatList
-        data={testData}
-        renderItem={({ item }) => (
-          <TouchableOpacity
+      <SafeAreaView style={styles.container}>
+        <View style={{ maxHeight: 200, maxWidth: 200 }}>
+          <FlatList
+            style={{ flexGrow: 0 }}
+            data={testData}
+            renderItem={({ item }) => (
+              <Pressable
+                style={{ alignItems: "center" }}
+                onPress={() => {
+                  setSelectedTest(item);
+                }}
+              >
+                <Text>{item.title}</Text>
+              </Pressable>
+            )}
+          />
+        </View>
+        <View style={{ flexDirection: "row" }}>
+          <Button
+            buttonStyle={{ marginRight: 20 }}
+            title={"Grade test Manually"}
             onPress={() => {
-              setSelectedTest(item);
+              if (selectedTest) {
+                navigation.navigate("TestAnswerEntryScreen", {
+                  selectedTest: selectedTest
+                });
+              } else {
+                alert("you need to select a test first");
+              }
             }}
-          >
-            <Text>{item.title}</Text>
-          </TouchableOpacity>
-        )}
-      />
-      <Button
-        title={"Grade test Manually"}
-        onPress={() => {
-          if (selectedTest) {
-            navigation.navigate("TestAnswerEntryScreen", {
-              selectedTest: selectedTest
-            });
-          } else {
-            alert("you need to select a test first");
-          }
-        }}
-      ></Button>
+          ></Button>
+          <Button
+            title={"Grade test Manually"}
+            onPress={() => {
+              if (selectedTest) {
+                navigation.navigate("TestAnswerEntryScreen", {
+                  selectedTest: selectedTest
+                });
+              } else {
+                alert("you need to select a test first");
+              }
+            }}
+          ></Button>
+        </View>
+      </SafeAreaView>
     </>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    alignItems: "center"
+  }
+});
 
 export default TestSelectionScreen;

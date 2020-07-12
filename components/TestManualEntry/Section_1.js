@@ -1,4 +1,5 @@
 import React, { useEffect, useState, memo } from "react";
+import { s1Questions } from "../useful";
 import S1QuestionRow from "../CustomUI/S1QuestionRow";
 import {
   AppRegistry,
@@ -22,60 +23,7 @@ function useA() {
     try {
       setLoadingA(true);
       //const value = await AsyncStorage.getAllKeys();
-      const value = await AsyncStorage.multiGet([
-        "S10",
-        "S11",
-        "S12",
-        "S13",
-        "S14",
-        "S15",
-        "S16",
-        "S17",
-        "S18",
-        "S19",
-        "S110",
-        "S111",
-        "S112",
-        "S113",
-        "S114",
-        "S115",
-        "S116",
-        "S117",
-        "S118",
-        "S119",
-        "S120",
-        "S121",
-        "S122",
-        "S123",
-        "S124",
-        "S125",
-        "S126",
-        "S127",
-        "S128",
-        "S129",
-        "S130",
-        "S131",
-        "S132",
-        "S133",
-        "S134",
-        "S135",
-        "S136",
-        "S137",
-        "S138",
-        "S139",
-        "S140",
-        "S141",
-        "S142",
-        "S143",
-        "S144",
-        "S145",
-        "S146",
-        "S147",
-        "S148",
-        "S149",
-        "S150",
-        "S151"
-      ]);
+      const value = await AsyncStorage.multiGet(s1Questions);
       setValueA(value);
     } catch (e) {
       setErrorA(e);
