@@ -61,8 +61,7 @@ function TestFormS3(props) {
       let val = answerObj[`S3${i}`];
       // console.log(val);
       if (val !== null) {
-        val = Number(val);
-        if (val === -10) {
+        if (val == -10) {
           questionRows.push([
             <S3QuestionRow qNumber={i} submit={submit} initial={-11} />
           ]);

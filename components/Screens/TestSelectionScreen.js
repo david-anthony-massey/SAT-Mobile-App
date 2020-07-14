@@ -5,7 +5,8 @@ import {
   FlatList,
   TouchableOpacity,
   StyleSheet,
-  SafeAreaView
+  SafeAreaView,
+  AsyncStorage
 } from "react-native";
 import { Button, ListItem } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
@@ -13,6 +14,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { testData } from "../../assets/data/testData";
 import SelectedValue from "../CustomUI/SelectedValue";
+import { allQuestions } from "../useful";
 import TestAnswerEntryScreen from "./TestAnswerEntryScreen";
 import { color } from "react-native-reanimated";
 import { red } from "ansi-colors";
@@ -100,6 +102,7 @@ function TestSelectionScreen({ navigation }) {
             title={"Grade test Manually\n 👆🏽 "}
             onPress={() => {
               if (selectedTest) {
+                AsyncStorage.multiRemove(allQuestions);
                 navigation.navigate("TestAnswerEntryScreen", {
                   selectedTest: selectedTest
                 });

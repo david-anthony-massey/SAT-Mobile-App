@@ -59,10 +59,8 @@ function TestFormS4(props) {
 
     for (let i = 0; i < 30; i++) {
       let val = answerObj[`S4${i}`];
-      // console.log(val);
       if (val !== null) {
-        val = Number(val);
-        if (val === -10) {
+        if (val == -10) {
           questionRows.push([
             <S4QuestionRow qNumber={i} submit={submit} initial={-11} />
           ]);

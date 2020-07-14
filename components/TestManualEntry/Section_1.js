@@ -65,19 +65,12 @@ function TestFormS1(props) {
       let val = answerObj[`S1${i}`];
       //console.log(val);
       if (val !== null) {
-        val = Number(val);
-        if (val === -10) {
-          questionRows.push([
-            <S1QuestionRow qNumber={i} submit={submit} initial={-11} />
-          ]);
-        } else {
-          questionRows.push([
-            <S1QuestionRow qNumber={i} submit={submit} initial={val} />
-          ]);
-        }
+        questionRows.push([
+          <S1QuestionRow qNumber={i} submit={submit} initial={val} />
+        ]);
       } else {
         questionRows.push([
-          <S1QuestionRow qNumber={i} submit={submit} initial={-12} />
+          <S1QuestionRow qNumber={i} submit={submit} initial={-1} />
         ]);
       }
     }

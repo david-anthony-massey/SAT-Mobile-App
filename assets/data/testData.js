@@ -131,10 +131,7 @@ export const testData = [
             }
             return false;
           },
-          "2",
-          "2.0",
-          "2.00",
-          "2.000"
+          "2"
         ],
         [
           studentAnswer => {
@@ -179,11 +176,7 @@ export const testData = [
             }
             return false;
           },
-          "4/5",
-          ".8",
-          "0.8",
-          "00.80",
-          "0.80"
+          "4/5 or .8"
         ],
         [
           studentAnswer => {
@@ -252,9 +245,7 @@ export const testData = [
             }
             return false;
           },
-          "between",
-          "4",
-          "6"
+          "Anything between 4 and 6"
         ],
         [
           studentAnswer => {
@@ -284,8 +275,7 @@ export const testData = [
             }
             return false;
           },
-          "5/8",
-          ".625"
+          "5/8 or .625"
         ],
         [
           studentAnswer => {

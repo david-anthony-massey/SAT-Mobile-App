@@ -38,11 +38,11 @@ function S3QuestionRow(props) {
         initial={-1}
       />
     );
-
-    AsyncStorage.setItem(`S3${props.qNumber}`, "-10");
+    // NOT IDEAL - CALLS EVEN WHEN BLANK ALREADY SELECTED
+    AsyncStorage.setItem(`S3${props.qNumber}`, "blank");
   } else {
     //console.log(props.initial, "initial");
-    if (props.initial === -11 && alreadyBlank) {
+    if (props.initial === "blank" && alreadyBlank) {
       setAlreadyBlank(false);
       setBlankCheck(true);
     } else if (props.initial > -11 && props.initial < 0 && alreadyGuess) {
@@ -74,7 +74,7 @@ function S3QuestionRow(props) {
             } else {
               AsyncStorage.setItem(
                 `S3${props.qNumber}`,
-                `-${pickedAnswer + 1}`
+                `-${Number(pickedAnswer + 1)}`
               );
             }
             setGuessCheck(!guessCheck);
@@ -87,7 +87,7 @@ function S3QuestionRow(props) {
     if (guessCheck) {
       //console.log(guessCheck);
       var ans = Math.abs(props.initial) - 1;
-    } else if (props.initial === -12) {
+    } else if (props.initial === "blank") {
       var ans = -1;
     } else {
       var ans = props.initial;
