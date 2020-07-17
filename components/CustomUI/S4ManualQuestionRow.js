@@ -48,7 +48,7 @@ function S4ManualQuestionRow(props) {
     // });
     if (props.initial === "blank" || props.initial === "null") {
       var ans = "";
-    } else if (guessCheck && pickedAnswer[0] === "-") {
+    } else if (guessCheck && pickedAnswer[0] === "ß") {
       setPickedAnswer(pickedAnswer.slice(1));
     } else {
       var ans = pickedAnswer;
@@ -73,7 +73,7 @@ function S4ManualQuestionRow(props) {
             } else {
               AsyncStorage.setItem(
                 `S4${props.qNumber}`,
-                `-${pickedAnswer}`
+                `ß${pickedAnswer}`
               ).then(() => {
                 setGuessCheck(!guessCheck);
               });
@@ -97,7 +97,7 @@ function S4ManualQuestionRow(props) {
         onChangeText={text => {
           console.log(`a${ans}a _ t${text}t`);
           if (guessCheck) {
-            AsyncStorage.setItem(`S4${props.qNumber}`, `-${text}`).then(() => {
+            AsyncStorage.setItem(`S4${props.qNumber}`, `ß${text}`).then(() => {
               setPickedAnswer(text);
             });
           } else {

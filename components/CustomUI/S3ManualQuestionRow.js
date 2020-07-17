@@ -33,7 +33,7 @@ function S3ManualQuestionRow(props) {
     if (props.initial === "blank" && alreadyBlank) {
       setAlreadyBlank(false);
       setBlankCheck(true);
-    } else if (props.initial[0] === "-" && alreadyGuess) {
+    } else if (props.initial[0] === "ß" && alreadyGuess) {
       setAlreadyGuess(false);
       setGuessCheck(true);
       setPickedAnswer(props.initial.slice(1));
@@ -53,7 +53,7 @@ function S3ManualQuestionRow(props) {
     // });
     if (props.initial === "blank") {
       var ans = "";
-    } else if (guessCheck && pickedAnswer[0] === "-") {
+    } else if (guessCheck && pickedAnswer[0] === "ß") {
       setPickedAnswer(pickedAnswer.slice(1));
     } else {
       var ans = pickedAnswer;
@@ -79,7 +79,7 @@ function S3ManualQuestionRow(props) {
             } else {
               AsyncStorage.setItem(
                 `S3${props.qNumber}`,
-                `-${pickedAnswer}`
+                `ß${pickedAnswer}`
               ).then(() => {
                 setGuessCheck(!guessCheck);
               });
@@ -103,7 +103,7 @@ function S3ManualQuestionRow(props) {
         onChangeText={text => {
           console.log(`a${ans}a _ t${text}t`);
           if (guessCheck) {
-            AsyncStorage.setItem(`S3${props.qNumber}`, `-${text}`).then(() => {
+            AsyncStorage.setItem(`S3${props.qNumber}`, `ß${text}`).then(() => {
               setPickedAnswer(text);
             });
           } else {
