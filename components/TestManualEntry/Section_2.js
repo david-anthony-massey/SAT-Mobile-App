@@ -61,18 +61,12 @@ function TestFormS2(props) {
       let val = answerObj[`S2${i}`];
       //console.log(val);
       if (val !== null) {
-        if (val == -10) {
-          questionRows.push([
-            <S2QuestionRow qNumber={i} submit={submit} initial={-11} />
-          ]);
-        } else {
-          questionRows.push([
-            <S2QuestionRow qNumber={i} submit={submit} initial={val} />
-          ]);
-        }
+        questionRows.push([
+          <S2QuestionRow qNumber={i} submit={submit} initial={val} />
+        ]);
       } else {
         questionRows.push([
-          <S2QuestionRow qNumber={i} submit={submit} initial={-12} />
+          <S2QuestionRow qNumber={i} submit={submit} initial={-1} />
         ]);
       }
     }

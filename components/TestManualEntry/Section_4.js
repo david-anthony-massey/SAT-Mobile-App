@@ -60,18 +60,12 @@ function TestFormS4(props) {
     for (let i = 0; i < 30; i++) {
       let val = answerObj[`S4${i}`];
       if (val !== null) {
-        if (val == -10) {
-          questionRows.push([
-            <S4QuestionRow qNumber={i} submit={submit} initial={-11} />
-          ]);
-        } else {
-          questionRows.push([
-            <S4QuestionRow qNumber={i} submit={submit} initial={val} />
-          ]);
-        }
+        questionRows.push([
+          <S4QuestionRow qNumber={i} submit={submit} initial={val} />
+        ]);
       } else {
         questionRows.push([
-          <S4QuestionRow qNumber={i} submit={submit} initial={-12} />
+          <S4QuestionRow qNumber={i} submit={submit} initial={-1} />
         ]);
       }
     }
@@ -85,7 +79,7 @@ function TestFormS4(props) {
         ]);
       } else {
         questionRows.push([
-          <S4ManualQuestionRow qNumber={i} submit={submit} initial={"null"} />
+          <S4ManualQuestionRow qNumber={i} submit={submit} initial={"blank"} />
         ]);
       }
     }

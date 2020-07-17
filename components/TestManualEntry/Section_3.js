@@ -61,18 +61,12 @@ function TestFormS3(props) {
       let val = answerObj[`S3${i}`];
       // console.log(val);
       if (val !== null) {
-        if (val == -10) {
-          questionRows.push([
-            <S3QuestionRow qNumber={i} submit={submit} initial={-11} />
-          ]);
-        } else {
-          questionRows.push([
-            <S3QuestionRow qNumber={i} submit={submit} initial={val} />
-          ]);
-        }
+        questionRows.push([
+          <S3QuestionRow qNumber={i} submit={submit} initial={val} />
+        ]);
       } else {
         questionRows.push([
-          <S3QuestionRow qNumber={i} submit={submit} initial={-12} />
+          <S3QuestionRow qNumber={i} submit={submit} initial={-1} />
         ]);
       }
     }
@@ -86,7 +80,7 @@ function TestFormS3(props) {
         ]);
       } else {
         questionRows.push([
-          <S3ManualQuestionRow qNumber={i} submit={submit} initial={"-"} />
+          <S3ManualQuestionRow qNumber={i} submit={submit} initial={"blank"} />
         ]);
       }
     }

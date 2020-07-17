@@ -17,11 +17,6 @@ function S4ManualQuestionRow(props) {
   const [alreadyBlank, setAlreadyBlank] = useState(true);
   const [alreadyGuess, setAlreadyGuess] = useState(true);
   const [pickedAnswer, setPickedAnswer] = useState(props.initial);
-  //const [result, loading] = useAsyncGrabGrade(`S1${props.qNumber}`);
-
-  //   useEffect(() => {
-  //     setState({ ...state, [`S1${props.qNumber}`]: studentAnswer });
-  //   }, [props.submit]);
 
   if (blankCheck) {
     var guessCheckBox;
@@ -33,7 +28,7 @@ function S4ManualQuestionRow(props) {
     if (props.initial === "blank" && alreadyBlank) {
       setAlreadyBlank(false);
       setBlankCheck(true);
-    } else if (props.initial[0] === "-" && alreadyGuess) {
+    } else if (props.initial[0] === "ß" && alreadyGuess) {
       setAlreadyGuess(false);
       setGuessCheck(true);
       setPickedAnswer(props.initial.slice(1));

@@ -14,8 +14,11 @@ import RadioForm, {
   RadioButtonInput,
   RadioButtonLabel
 } from "react-native-simple-radio-button";
+import getInitialProps from "../CustomHooks/getInitialProps";
 
 function S2QuestionRow(props) {
+  const [initialCode, setInitialCode] = useState(Number(props.initial));
+  const [answer, isBlank, isGuess, code] = getInitialProps(initialCode);
   const [blankCheck, setBlankCheck] = useState(false);
   const [guessCheck, setGuessCheck] = useState(false);
   const [alreadyBlank, setAlreadyBlank] = useState(true);
@@ -27,7 +30,9 @@ function S2QuestionRow(props) {
   //     setState({ ...state, [`S1${props.qNumber}`]: studentAnswer });
   //   }, [props.submit]);
 
-  if (blankCheck) {
+  console.log(code);
+
+  if (isBlank) {
     var guessCheckBox;
     var radioButton = (
       <RadioForm
@@ -37,19 +42,8 @@ function S2QuestionRow(props) {
         initial={-1}
       />
     );
-
-    AsyncStorage.setItem(`S2${props.qNumber}`, "-10");
+    AsyncStorage.setItem(`S2${props.qNumber}`, `${code}`);
   } else {
-    //console.log(props.initial, "initial");
-    if (props.initial === -11 && alreadyBlank) {
-      setAlreadyBlank(false);
-      setBlankCheck(true);
-    } else if (props.initial > -11 && props.initial < 0 && alreadyGuess) {
-      setAlreadyGuess(false);
-      setGuessCheck(true);
-      setPickedAnswer(Math.abs(props.initial) - 1);
-    }
-
     // AsyncStorage.getItem(`S1${props.qNumber}`).then(value => {
     //   if (value === null) {
     //     console.log("nope");
@@ -63,34 +57,37 @@ function S2QuestionRow(props) {
     var guessCheckBox = (
       <View>
         <Checkbox
-          checked={guessCheck}
+          checked={isGuess}
           size={30}
           question={props.qNumber}
           onCheck={() => {
-            //console.log("1st picked ans", pickedAnswer);
-            if (guessCheck) {
-              AsyncStorage.setItem(`S2${props.qNumber}`, `${pickedAnswer}`);
+            if (initialCode != -1) {
+              //console.log("1st picked ans", pickedAnswer);
+              if (isGuess) {
+                AsyncStorage.setItem(
+                  `S2${props.qNumber}`,
+                  `${initialCode - 4}`
+                ).then(() => {
+                  setInitialCode(initialCode - 4);
+                });
+              } else {
+                AsyncStorage.setItem(
+                  `S2${props.qNumber}`,
+                  `${initialCode + 4}`
+                ).then(() => {
+                  setInitialCode(initialCode + 4);
+                });
+              }
             } else {
-              AsyncStorage.setItem(
-                `S2${props.qNumber}`,
-                `-${pickedAnswer + 1}`
-              );
+              AsyncStorage.setItem(`S2${props.qNumber}`, `-2`).then(() => {
+                setInitialCode(-2);
+              });
             }
-            setGuessCheck(!guessCheck);
           }}
         />
         <Text>Guess</Text>
       </View>
     );
-
-    if (guessCheck) {
-      // console.log(guessCheck);
-      var ans = Math.abs(props.initial) - 1;
-    } else if (props.initial === -12) {
-      var ans = -1;
-    } else {
-      var ans = props.initial;
-    }
 
     var radioButton = (
       <RadioForm
@@ -102,15 +99,19 @@ function S2QuestionRow(props) {
         ]}
         formHorizontal={true}
         labelHorizontal={false}
-        initial={ans}
+        initial={answer}
         onPress={value => {
-          if (guessCheck) {
+          if (isGuess) {
             //console.log("neg val + 1", value);
-            setPickedAnswer(value);
-            AsyncStorage.setItem(`S2${props.qNumber}`, `-${value + 1}`);
+            AsyncStorage.setItem(`S2${props.qNumber}`, `${value + 4}`).then(
+              () => {
+                setInitialCode(value + 4);
+              }
+            );
           } else {
-            setPickedAnswer(value);
-            AsyncStorage.setItem(`S2${props.qNumber}`, `${value}`);
+            AsyncStorage.setItem(`S2${props.qNumber}`, `${value}`).then(() => {
+              setInitialCode(value);
+            });
           }
         }}
       />
@@ -119,11 +120,19 @@ function S2QuestionRow(props) {
 
   let blankCheckBox = (
     <Checkbox
-      checked={blankCheck}
+      checked={isBlank}
       size={30}
       question={props.qNumber}
       onCheck={() => {
-        setBlankCheck(!blankCheck);
+        if (answer != -1) {
+          if (isBlank) {
+            setInitialCode(initialCode - 8);
+          } else {
+            setInitialCode(initialCode + 8);
+          }
+        } else {
+          setInitialCode(-3);
+        }
       }}
     />
   );
