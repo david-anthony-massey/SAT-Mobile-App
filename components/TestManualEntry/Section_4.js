@@ -79,7 +79,7 @@ function TestFormS4(props) {
         ]);
       } else {
         questionRows.push([
-          <S4ManualQuestionRow qNumber={i} submit={submit} initial={"blank"} />
+          <S4ManualQuestionRow qNumber={i} submit={submit} initial={""} />
         ]);
       }
     }

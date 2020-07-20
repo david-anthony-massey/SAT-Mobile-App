@@ -14,6 +14,8 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { testData } from "../../assets/data/testData";
 import SelectedValue from "../CustomUI/SelectedValue";
+import CBTestsText from "../Texts/CBTestsText";
+import TitleText from "../Texts/TitleText";
 import { allQuestions } from "../useful";
 import TestAnswerEntryScreen from "./TestAnswerEntryScreen";
 import { color } from "react-native-reanimated";
@@ -32,10 +34,10 @@ function TestSelectionScreen({ navigation }) {
     <>
       <SafeAreaView style={styles.container}>
         <Text style={{ marginBottom: 30, marginTop: 30 }}>
-          Choose Your Test
+          <TitleText text="Choose A New Test To Grade" />
         </Text>
         <View
-          style={{ maxHeight: 200, maxWidth: 200 }}
+          style={{ maxHeight: 200, maxWidth: 300 }}
           selectedItem={selectedTest}
         >
           <FlatList
@@ -44,7 +46,7 @@ function TestSelectionScreen({ navigation }) {
             data={testData}
             renderItem={
               ({ item, index }) => {
-                if (index == selectedItem) {
+                if (index === selectedItem) {
                   console.log("is this happening");
                   return (
                     <SelectedValue
@@ -120,7 +122,8 @@ function TestSelectionScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center"
+    alignItems: "center",
+    backgroundColor: "lightblue"
   }
 });
 

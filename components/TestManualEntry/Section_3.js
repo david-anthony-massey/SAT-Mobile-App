@@ -80,7 +80,7 @@ function TestFormS3(props) {
         ]);
       } else {
         questionRows.push([
-          <S3ManualQuestionRow qNumber={i} submit={submit} initial={"blank"} />
+          <S3ManualQuestionRow qNumber={i} submit={submit} initial={""} />
         ]);
       }
     }

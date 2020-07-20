@@ -1,4 +1,5 @@
 import * as React from "react";
+import * as Font from "expo-font";
 import { Text, View, StyleSheet, ImageBackground } from "react-native";
 import { Button, ListItem } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
@@ -14,6 +15,13 @@ import TestFormS4 from "./components/TestManualEntry/Section_4";
 import TestSelectionScreen from "./components/Screens/TestSelectionScreen";
 import TestAnswerEntryScreen from "./components/Screens/TestAnswerEntryScreen";
 import GradeResultsScreen from "./components/Screens/GradeResultsScreen";
+import WordProblemsConceptScreen from "./components/Screens/WordProblemsConceptsScreen";
+
+const fetchFonts = () => {
+  return Font.loadAsync({
+    "BreeSerif-Regular": require("./assets/fonts/BreeSerif-Regular.ttf")
+  });
+};
 
 const correctAnswers = [];
 
@@ -381,12 +389,20 @@ function ConceptsScreen() {
   return (
     <ConceptsStack.Navigator>
       <ConceptsStack.Screen
-        name="SectionSelectScreen"
-        component={SectionSelectScreen}
+        name="word_problems"
+        component={WordProblemsConceptScreen}
       />
       <ConceptsStack.Screen
-        name="SectionSelectScreen"
-        component={SectionSelectScreen}
+        name="linear_equations"
+        component={WordProblemsConceptScreen}
+      />
+      <ConceptsStack.Screen
+        name="plugging_into_formulas"
+        component={WordProblemsConceptScreen}
+      />
+      <ConceptsStack.Screen
+        name="make_it_real"
+        component={WordProblemsConceptScreen}
       />
     </ConceptsStack.Navigator>
   );
@@ -411,6 +427,7 @@ function App1() {
 // }
 export default function App() {
   const [state, setState] = React.useState({});
+  fetchFonts();
   return (
     <GlobalState.Provider value={[state, setState]}>
       <App1 />
