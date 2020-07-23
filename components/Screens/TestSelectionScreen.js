@@ -1,4 +1,6 @@
 import * as React from "react";
+import * as Permissions from "expo-permissions";
+import { Camera } from "expo-camera";
 import {
   Text,
   View,
@@ -91,13 +93,9 @@ function TestSelectionScreen({ navigation }) {
             buttonStyle={{ marginRight: 20 }}
             title={"Grade with Camera\n 📷 "}
             onPress={() => {
-              if (selectedTest) {
-                navigation.navigate("TestAnswerEntryScreen", {
-                  selectedTest: selectedTest
-                });
-              } else {
-                alert("you need to select a test first");
-              }
+              navigation.navigate("Upload Image", {
+                selectedTest: selectedTest
+              });
             }}
           ></Button>
           <Button

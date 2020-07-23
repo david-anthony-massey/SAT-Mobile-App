@@ -24,7 +24,7 @@ import { color } from "react-native-reanimated";
 import { red, underline } from "ansi-colors";
 import { ScrollView } from "react-native-gesture-handler";
 
-function WordProblemsConceptScreen({ navigation }) {
+function PunctuationRulesConceptScreen({ navigation }) {
   const [expression, setExpression] = React.useState("T = 5c + 12f");
   return (
     <>
@@ -40,9 +40,9 @@ function WordProblemsConceptScreen({ navigation }) {
                 alignSelf: "center"
               }}
             >
-              <NormalText text={`Math Concepts`} />
+              <NormalText text={`Writing Concepts`} />
             </Text>
-            <TitleText text={`Word Problems`} />
+            <TitleText text={`Punctuation Rules`} />
           </View>
           <Text
             style={{
@@ -53,7 +53,7 @@ function WordProblemsConceptScreen({ navigation }) {
               alignSelf: "center"
             }}
           >
-            {`   Word problems are difficult for many students due to the fact that there can feel like an overload of information with no clear way to use it.`}
+            {`   Punctuation questions are one of the easiest writing concepts to study for because they rely on formula based rules that can be memorized. Just like you (should) know the pathagorean theorem, you can know what a comma can and cannot do in a sentence`}
           </Text>
           <Text
             style={{
@@ -62,7 +62,7 @@ function WordProblemsConceptScreen({ navigation }) {
               alignSelf: "center"
             }}
           >
-            {`   Common concepts that are tested in math word problems are systems of equations, percent increase/decrease, and inequalities.`}
+            {`   Punctuation rules are mostly tested in questions that don't have a question, meaning that you are only choosing A, B, C, or D and not trying to do anything specific for the question. A very important note about punctuation questions is that you should ALWAYS check for other punctuation in the sentence, even if there are no punctuation marks in the answer choices. Determine what the other punctuation is doing in the sentence to figure out which answer choice works best with the punctuation that's already there.`}
           </Text>
           <Text
             style={{
@@ -76,7 +76,7 @@ function WordProblemsConceptScreen({ navigation }) {
               textDecorationLine: "underline"
             }}
           >
-            {`Steps for solving these questions go as follows:`}
+            {`Below are the most important punctuation rules to memorize:`}
           </Text>
           <Text
             style={{
@@ -92,11 +92,28 @@ function WordProblemsConceptScreen({ navigation }) {
               borderWidth: 2
             }}
           >
-            {`   1. Identify variables and make sure you note EXACTLY what they represent. There can be tricks in their definitions, like "x is the number of years after 2000". This means that if the year is 2000, then x = 0.
+            {`   1. A semicolon ( ; ) separates two independent clauses. Independent clauses are complete sentences, and they can stand alone as a sentence. The other punctuation marks used to separate two independent clauses are periods and a comma paired with an appropriate coordinating conjuction (FANBOYS - for, and, nor, but, or, yet, and so).
+    
+    Because these all perform the same function, they should be considered to be exactly the same on this test. Meaning that if I had the following answer choices on my test,
+    
+    A. lied. Then
+    B. lied; then
+    C. lied then
+    D. lied, then
+    
+    Answer choice C or D would have to be the correct answer because A and B are using punctuation that does the same thing, and there can't be multiple correct answers, so they must both be wrong.
+    On this test you will frequently see answer choices that are exactly the same except they will replace a period with a semicolon or a comma with an appropriate FANBOYS. Don't be fooled! Both answers choices must be wrong because a period and a semicolon do exactly the same thing.
 
-    2. Create equations sentence by sentence as you go through the question. Be very careful to create equations that match what is being said, and it can help to plug in real numbers for the variables to make sure your equations make sense. The purpose of creating equations is to eventually solve for one variable like in a systems of equations. Whenever you can, try to solve for one variable in terms of another.
+    2. A colon ( : ) is used after an independent clause and before a direct example or explanation of what the previous sentence was discussing. A colon can be used before a list, but it can also be used before an independent clause or a single word. An easy way to determine if a colon is being used incorrectly is to determine if what came before it was an independent clause or not.
 
-    3. Ensure that you answer the question that's being asked and not something you solved for earlier. Boxing the question you care about and looking at it again before you move on can help prevent you from making mistakes.`}
+    Correct -   If I could have one wish come true, I would only want one thing: a new car.
+    Correct -   I have three pets: Max, Dilby, and Cinnamon.
+    Correct -   I only agree with one theory of relativity: Einstein's theory of relativity which states all matter is made of energy.
+    Incorrect - I love only certain types of pizza, including: pepperoni, mushroom, and olive.
+    
+    "I love to eat many different types of pizza, including" came before the colon, and because it is not an independent clause, the colon is being used incorrectly. Words like "including", "such as", "like", and "for example" usually don't belong before a colon because saying them at the end of a sentence would make the sentence no longer be independent.
+
+    3. `}
           </Text>
           <Text
             style={{
@@ -116,7 +133,6 @@ function WordProblemsConceptScreen({ navigation }) {
               height: 300,
               width: 350,
               alignSelf: "center",
-              alignContent: "center",
               textAlignVertical: "center",
               textAlign: "center",
               justifyContent: "center",
@@ -218,7 +234,6 @@ function WordProblemsConceptScreen({ navigation }) {
           >
             {`   Then we can take the next chunk of information in the sentence, "3,000 units were shipped to the farther location," and plug that in for "f" because our variable f equals the number of units shipped to the farther away location. This makes our new equation:`}
           </Text>
-
           <Katex
             expression={`\\$47,500 = 5c + 12(3,000)`}
             style={styles.katexBorder}
@@ -236,6 +251,7 @@ function WordProblemsConceptScreen({ navigation }) {
           <Text style={{ alignSelf: "center", marginTop: 3, fontSize: 8 }}>
             * remember to always plug in with parentheses *
           </Text>
+
           <Text
             style={{
               marginTop: 10,
@@ -269,6 +285,7 @@ function WordProblemsConceptScreen({ navigation }) {
             }}
             onError={() => console.error("Error")}
           />
+
           <Text
             style={{
               marginTop: 10,
@@ -284,12 +301,7 @@ function WordProblemsConceptScreen({ navigation }) {
 These questions can get very sneaky and may require knowledge of more difficult concepts, but try taking them apart one piece at a time, and I guarentee you'll do better than thinking it looks too long and freaking-out/skipping it.`}
           </Text>
           <Button
-            containerStyle={{
-              alignSelf: "center",
-              height: 70,
-              width: 100,
-              marginTop: 20
-            }}
+            style={{ alignSelf: "center", height: 70, width: 100 }}
             onPress={() => {
               navigation.navigate("Concepts Home");
             }}
@@ -310,13 +322,11 @@ html, body {
   height: 100%;
   margin: 0;
   padding: 0;
-  overflow: hidden;
 }
 .katex {
   font-size: 4em;
   margin: 0;
   display: flex;
-  overflow: hidden;
 }
 `;
 
@@ -344,8 +354,7 @@ const styles = StyleSheet.create({
     borderRadius: 10
   },
   katexLargeBorder: {
-    padding: 5,
-    marginTop: 5,
+    marginTop: 10,
     alignSelf: "center",
     flex: 1,
     height: 200,
@@ -356,4 +365,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default WordProblemsConceptScreen;
+export default PunctuationRulesConceptScreen;

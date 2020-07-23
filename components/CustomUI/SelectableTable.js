@@ -7,7 +7,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import { Table, TableWrapper, Row } from "react-native-table-component";
-
+import { NavigationActions } from "react-navigation";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -106,8 +106,8 @@ class SelectableTable extends Component {
                         </TouchableOpacity>
                       );
                     } else {
-                      console.log("dataRow", dataRow);
-                      dataRow = [
+                      console.log("dataRow[0][1]", dataRow[0][1]);
+                      let concept = [
                         <TouchableOpacity
                           onPress={() => {
                             this.props.navigation.navigate("Concepts", {
@@ -121,7 +121,7 @@ class SelectableTable extends Component {
                       return (
                         <Row
                           key={index}
-                          data={dataRow}
+                          data={concept}
                           widthArr={[290]}
                           style={[
                             styles.row,

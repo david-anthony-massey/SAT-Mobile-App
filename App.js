@@ -12,6 +12,9 @@ import TestFormS1 from "./components/TestManualEntry/Section_1";
 import TestFormS2 from "./components/TestManualEntry/Section_2";
 import TestFormS3 from "./components/TestManualEntry/Section_3";
 import TestFormS4 from "./components/TestManualEntry/Section_4";
+import CameraScreen from "./components/Screens/CameraScreen";
+import ConceptsHomeScreen from "./components/Screens/ConceptsHomeScreen";
+import PunctuationRulesConceptScreen from "./components/Screens/PunctuationRulesConceptScreen";
 import TestSelectionScreen from "./components/Screens/TestSelectionScreen";
 import TestAnswerEntryScreen from "./components/Screens/TestAnswerEntryScreen";
 import GradeResultsScreen from "./components/Screens/GradeResultsScreen";
@@ -379,6 +382,7 @@ function TestsScreen() {
         name="GradeResultsScreen"
         component={GradeResultsScreen}
       />
+      <TestsStack.Screen name="Upload Image" component={CameraScreen} />
     </TestsStack.Navigator>
   );
 }
@@ -388,6 +392,14 @@ const ConceptsStack = createStackNavigator();
 function ConceptsScreen() {
   return (
     <ConceptsStack.Navigator>
+      <ConceptsStack.Screen
+        name="Punctuation Rules"
+        component={PunctuationRulesConceptScreen}
+      />
+      <ConceptsStack.Screen
+        name="Concepts Home"
+        component={ConceptsHomeScreen}
+      />
       <ConceptsStack.Screen
         name="word_problems"
         component={WordProblemsConceptScreen}
