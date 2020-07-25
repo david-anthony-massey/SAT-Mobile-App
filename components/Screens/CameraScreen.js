@@ -60,8 +60,9 @@ export default class CameraScreen extends Component {
         setInterval(
           function() {
             this.camera
-              .takePictureAsync({ skipProcessing: true })
+              .takePictureAsync({ skipProcessing: true, quality: 1 })
               .then(data => {
+                console.log(data.height, data.width);
                 this.setState(
                   {
                     //takeImageText: "PICTURE TAKEN",
