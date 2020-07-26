@@ -1,5 +1,12 @@
 import React, { Component } from "react";
-import { View, TouchableOpacity, Platform, Text, Image } from "react-native";
+import {
+  View,
+  TouchableOpacity,
+  Platform,
+  Text,
+  Image,
+  Dimensions
+} from "react-native";
 import { Button } from "react-native-elements";
 import { Buffer } from "buffer";
 import { Camera } from "expo-camera";
@@ -11,6 +18,7 @@ import {
 import * as Permissions from "expo-permissions";
 import * as ImagePicker from "expo-image-picker";
 import { isUnaryLike } from "@babel/types";
+const { width: winWidth, height: winHeight } = Dimensions.get("window");
 
 export default class CameraScreen extends Component {
   constructor(props) {
@@ -151,46 +159,51 @@ export default class CameraScreen extends Component {
               this.camera = ref;
             }}
           >
-            <TouchableOpacity
+            <View
               style={{
-                alignSelf: "flex-end",
-                alignItems: "center",
-                backgroundColor: "transparent"
+                flex: 1,
+                flexDirection: "row",
+                justifyContent: "space-between",
+                margin: 20
               }}
-              onPress={() => this.pickImage()}
             >
-              <Ionicons
-                name="ios-photos"
-                style={{ color: "#fff", fontSize: 40 }}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                alignSelf: "flex-end",
-                alignItems: "center",
-                backgroundColor: "transparent"
-              }}
-              onPress={() => this.takePicture()}
-            >
-              <FontAwesome
-                name="camera"
-                style={{ color: "#fff", fontSize: 40 }}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                alignSelf: "flex-end",
-                alignItems: "center",
-                backgroundColor: "transparent"
-              }}
-              onPress={() => this.handleCameraType()}
-            >
-              <MaterialCommunityIcons
-                name="camera-switch"
-                style={{ color: "#fff", fontSize: 40 }}
-              />
-            </TouchableOpacity>
-
+              <TouchableOpacity
+                style={{
+                  alignSelf: "flex-end",
+                  backgroundColor: "transparent"
+                }}
+                onPress={() => this.pickImage()}
+              >
+                <Ionicons
+                  name="ios-photos"
+                  style={{ color: "#fff", fontSize: 40 }}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  alignSelf: "flex-end",
+                  backgroundColor: "transparent"
+                }}
+                onPress={() => this.takePicture()}
+              >
+                <FontAwesome
+                  name="camera"
+                  style={{ color: "#fff", fontSize: 40 }}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  alignSelf: "flex-end",
+                  backgroundColor: "transparent"
+                }}
+                onPress={() => this.handleCameraType()}
+              >
+                <MaterialCommunityIcons
+                  name="camera-switch"
+                  style={{ color: "#fff", fontSize: 40 }}
+                />
+              </TouchableOpacity>
+            </View>
             <Button
               buttonStyle={{ color: "blue", fontSize: 40 }}
               title={`Choose Image`}
