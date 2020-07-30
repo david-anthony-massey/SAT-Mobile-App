@@ -131,7 +131,11 @@ function S1QuestionRow(props) {
             setInitialCode(initialCode + 8);
           }
         } else {
-          setInitialCode(-3);
+          if (isBlank) {
+            setInitialCode(-1);
+          } else {
+            setInitialCode(-3);
+          }
         }
       }}
     />

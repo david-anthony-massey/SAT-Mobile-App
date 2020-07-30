@@ -1,30 +1,13 @@
 import * as React from "react";
-import {
-  Text,
-  View,
-  FlatList,
-  TouchableOpacity,
-  StyleSheet,
-  SafeAreaView,
-  AsyncStorage
-} from "react-native";
-import { Button, ListItem } from "react-native-elements";
-import { NavigationContainer } from "@react-navigation/native";
-import { createStackNavigator } from "@react-navigation/stack";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { testData } from "../../assets/data/testData";
-import SelectedValue from "../CustomUI/SelectedValue";
-import CBTestsText from "../Texts/CBTestsText";
+import { Text, View, StyleSheet, SafeAreaView } from "react-native";
+import { Button } from "react-native-elements";
 import Katex from "react-native-katex";
 import TitleText from "../Texts/TitleText";
 import NormalText from "../Texts/NormalText";
-import { allQuestions } from "../useful";
-import TestAnswerEntryScreen from "./TestAnswerEntryScreen";
-import { color } from "react-native-reanimated";
-import { red, underline } from "ansi-colors";
 import { ScrollView } from "react-native-gesture-handler";
 
 function WordProblemsConceptScreen({ navigation }) {
+  // DELETE?
   const [expression, setExpression] = React.useState("T = 5c + 12f");
   return (
     <>

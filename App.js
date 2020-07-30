@@ -20,6 +20,8 @@ import TestAnswerEntryScreen from "./components/Screens/TestAnswerEntryScreen";
 import GradeResultsScreen from "./components/Screens/GradeResultsScreen";
 import WordProblemsConceptScreen from "./components/Screens/WordProblemsConceptsScreen";
 
+console.disableYellowBox = true;
+
 const fetchFonts = () => {
   return Font.loadAsync({
     "BreeSerif-Regular": require("./assets/fonts/BreeSerif-Regular.ttf")

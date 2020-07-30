@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Text, View, AsyncStorage } from "react-native";
+import { Text, View, AsyncStorage, KeyboardAvoidingView } from "react-native";
 import { Button, ListItem } from "react-native-elements";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
@@ -166,9 +166,12 @@ function TestAnswerEntryScreen({ route, navigation }) {
 
   return (
     <>
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+      <KeyboardAvoidingView
+        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+      >
         {section}
-      </View>
+      </KeyboardAvoidingView>
+
       {buttons}
     </>
   );
